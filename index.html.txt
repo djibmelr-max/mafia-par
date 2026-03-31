@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>لعبة الأدوار</title>
+  </head>
+  <body>
+    <h1>مرحبا في لعبة الأدوار</h1>
+    <button id="startButton">ابدأ اللعبة</button>
+    <div id="result"></div>
+
+    <script>
+      document.getElementById('startButton').addEventListener('click', function() {
+        document.getElementById('result').innerHTML = "سيتم توزيع الأدوار قريباً...";
+      });
+    </script>
+  </body>
+</html>
+
+أضف اسم
