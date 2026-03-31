@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>لعبة المافيا</title>
+</head>
+<body>
+
+<h1>لعبة المافيا</h1>
+
+<!-- مكان الأسماء -->
+<div id="players"></div>
+
+<!-- زر إضافة لاعب -->
+<button onclick="addPlayer()"> أضف لاعب</button>
+
+<!-- زر بدء اللعبة -->
+<button onclick="startGame()"> ابدأ اللعبة</button>
+
+<h2 id="result"></h2>
+
+<script>
+// إضافة input جديد
+function addPlayer() {
+  let div = document.createElement("div");
+  div.innerHTML = '<input type="text" placeholder="اسم اللاعب">';
+  document.getElementById("players").appendChild(div);
+}
+
+// خلط الأسماء
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// بدء اللعبة
+function startGame() {
+  let inputs = document.querySelectorAll("#players input");
+  let players = [];
+
+  inputs.forEach(input => {
+    if (input.value.trim() !== "") {
+      players.push(input.value.trim());
+    }
+  });
+
+  if (players.length < 9) {
+    alert("لازم على الأقل 9 لاعبين!");
+    return;
+  }
+
+  players = shuffle(players);
+
+  let roles = [];
+
+  // المافيا
+  roles.push("رئيس المافيا");
+  roles.push("مساعد المافيا");
+  roles.push("مافيا");
+
+  // أدوار خاصة
+  roles.push("العمدة");
+  roles.push("البيوعي");
+  roles.push("المسعف");
+
+  // الباقي مواطنين
+  while (roles.length < players.length) {
+    roles.push("مواطن");
+  }
+
+  roles = shuffle(roles);
+
+  let resultText = "";
+
+  for (let i = 0; i < players.length; i++) {
+    resultText += players[i] + " ➜ " + roles[i] + "<br>";
+  }
+
+  document.getElementById("result").innerHTML = resultText;
+}
+</script>
+
+</body>
+</html>
